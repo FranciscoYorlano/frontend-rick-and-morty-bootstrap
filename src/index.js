@@ -1,4 +1,9 @@
+// CSS
 import "./index.css";
+
+// Bootstrap
+import "bootstrap/dist/css/bootstrap.min.css";
+
 // React
 import React from "react";
 import ReactDOM from "react-dom";
