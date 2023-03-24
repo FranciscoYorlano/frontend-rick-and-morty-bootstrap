@@ -72,7 +72,7 @@ function App(props) {
 
     // Render
     return (
-        <div className="App">
+        <div className="container mx-auto max-w-screen-xl text-center">
             {useLocation().pathname !== "/login" && (
                 <Nav onSearch={onSearch} logout={logout} count={counter} />
             )}

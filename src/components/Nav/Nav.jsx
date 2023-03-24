@@ -17,7 +17,7 @@ function Nav(props) {
     };
 
     return (
-        <div>
+        <nav className="bg-gray-800 text-white flex items-center justify-between p-6">
             <Link to="/home">
                 <img src={logo} alt="Rick And Morty App" />
             </Link>
@@ -39,7 +39,7 @@ function Nav(props) {
                     Log Out
                 </button>
             </div>
-        </div>
+        </nav>
     );
 }
 
