@@ -1,4 +1,3 @@
-import styles from "./Detail.module.css";
 // React router dom imports
 import { useParams } from "react-router-dom";
 // Hooks

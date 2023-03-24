@@ -1,5 +1,3 @@
-// Styles
-import styles from "./Nav.module.css";
 import logo from "../../assets/rick-and-morty.png";
 // Component imports
 import SearchBar from "../SearchBar/SearchBar";
@@ -19,33 +17,25 @@ function Nav(props) {
     };
 
     return (
-        <div className={styles.container}>
+        <div>
             <Link to="/home">
-                <img
-                    src={logo}
-                    alt="Rick And Morty App"
-                    className={styles.logo}
-                />
+                <img src={logo} alt="Rick And Morty App" />
             </Link>
-            <ul className={styles.menu}>
-                <Link to="/home" className={styles.linkComp}>
-                    <li className={styles.link}>Home</li>
+            <ul>
+                <Link to="/home">
+                    <li>Home</li>
                 </Link>
-                <Link to="/favorites" className={styles.linkComp}>
-                    <li className={styles.link}>Favorites</li>
+                <Link to="/favorites">
+                    <li>Favorites</li>
                 </Link>
-                <Link to="/About" className={styles.linkComp}>
-                    <li className={styles.link}>About</li>
+                <Link to="/About">
+                    <li>About</li>
                 </Link>
             </ul>
-            <div className={styles.rightSection}>
-                <div className={styles.cardCount}>{count} Cards</div>
+            <div>
+                <div>{count} Cards</div>
                 <SearchBar onSearch={onSearch} />
-                <button
-                    type="submit"
-                    className={styles.logoutButton}
-                    onClick={handleSubmit}
-                >
+                <button type="submit" onClick={handleSubmit}>
                     Log Out
                 </button>
             </div>

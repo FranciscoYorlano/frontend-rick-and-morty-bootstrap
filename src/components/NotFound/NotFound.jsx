@@ -1,4 +1,3 @@
-import styles from "./NotFound.module.css";
 import logo from "../../assets/rick-and-morty.png";
 import { Link } from "react-router-dom";
 

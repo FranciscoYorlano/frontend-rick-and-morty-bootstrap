@@ -1,5 +1,3 @@
-// Styles
-import styles from "./SearchBar.module.css";
 // Hooks
 import { useState } from "react";
 
@@ -20,10 +18,9 @@ function SearchBar(props) {
     };
 
     return (
-        <div className={styles.searchContainer}>
+        <div>
             <input
                 type="search"
-                className={styles.searchInput}
                 placeholder="New card id.. (or random)"
                 name="characterId"
                 onChange={handleInputChange}
@@ -34,7 +31,6 @@ function SearchBar(props) {
                     onSearch(characterId);
                     setCharacterId("");
                 }}
-                className={styles.searchButton}
             >
                 Add
             </button>

@@ -1,3 +1,7 @@
 # Rick and Morty App
 
-Rick and Morty integration proyect for Soy Henry M2
+## Frontend Tailwind version
+
+### By Francisco Yorlano
+
+Rick and Morty integration proyect - Soy Henry

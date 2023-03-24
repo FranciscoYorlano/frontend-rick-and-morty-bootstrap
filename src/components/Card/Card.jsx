@@ -1,5 +1,3 @@
-// Styles
-import styles from "./Card.module.css";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Actions to dispatch
@@ -40,28 +38,15 @@ function Card(props) {
     };
 
     return (
-        <div className={styles.card}>
-            <div className="cardHeader">
-                <button
-                    className={styles.cardButton}
-                    onClick={() => onClose(char.id)}
-                >
+        <div>
+            <div>
+                <button onClick={() => onClose(char.id)}>
                     <FontAwesomeIcon icon={faTimes} />
                 </button>
                 {isFav ? (
-                    <button
-                        className={styles.cardButton}
-                        onClick={handleFavorite}
-                    >
-                        ❤️
-                    </button>
+                    <button onClick={handleFavorite}>❤️</button>
                 ) : (
-                    <button
-                        className={styles.cardButton}
-                        onClick={handleFavorite}
-                    >
-                        🤍
-                    </button>
+                    <button onClick={handleFavorite}>🤍</button>
                 )}
             </div>
             <h2>{char.name}</h2>
