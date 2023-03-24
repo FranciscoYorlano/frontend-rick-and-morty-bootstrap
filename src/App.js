@@ -1,0 +1,107 @@
+// Styles
+import "./App.css";
+// Component imports
+import About from "./components/About/About";
+import Cards from "./components/Cards/Cards";
+import Detail from "./components/Detail/Detail";
+import Favorites from "./components/Favorites/Favorites";
+import Login from "./components/Login/Login";
+import Nav from "./components/Nav/Nav";
+import NotFound from "./components/NotFound/NotFound";
+// Hooks imports
+import { useEffect, useState } from "react";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+// React route dom imports
+import { Route, Routes } from "react-router-dom";
+// Functions
+import onSearchExt from "./functions/onSearch";
+// React redux
+import { connect } from "react-redux";
+import { addFavorite, removeFavorite } from "./redux/actions";
+
+/* =================================================*/
+// Fake credencials
+const adminEmail = "admin@gmail.com";
+const adminPassword = "admin123";
+
+/* =================================================*/
+
+function App(props) {
+    // States
+    const [characters, setCharacters] = useState([]);
+    const [access, setAccess] = useState(false);
+
+    const navigate = useNavigate();
+    let counter = characters.length;
+
+    useEffect(() => {
+        !access && navigate("/login");
+    }, []);
+
+    // Functions
+    const login = (userCredentials) => {
+        const { email, password } = userCredentials;
+
+        if (email === adminEmail && password === adminPassword) {
+            setAccess(true);
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    const logout = () => {
+        setAccess(false);
+        navigate("/login");
+    };
+
+    const onSearch = (id) => {
+        onSearchExt(id, characters).then((characterNew) => {
+            if (characterNew) {
+                setCharacters([...characters, characterNew]);
+            } else {
+                console.log("error app");
+            }
+        });
+    };
+
+    const onClose = (id) => {
+        props.removeFavorite(id);
+        setCharacters(characters.filter((char) => char.id !== id));
+    };
+
+    // Render
+    return (
+        <div className="App">
+            {useLocation().pathname !== "/login" && (
+                <Nav onSearch={onSearch} logout={logout} count={counter} />
+            )}
+            <Routes>
+                <Route
+                    path="/home"
+                    element={
+                        <Cards characters={characters} onClose={onClose} />
+                    }
+                />
+                <Route
+                    path="/favorites"
+                    element={<Favorites onClose={onClose} />}
+                />
+                <Route exact path="/" element={<Navigate to="/home" />} />
+                <Route path="/login" element={<Login login={login} />} />
+                <Route path="/about" element={<About />} />
+
+                <Route path="/detail/:detailId" element={<Detail />} />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+        </div>
+    );
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addFavorite: (char) => dispatch(addFavorite(char)),
+        removeFavorite: (id) => dispatch(removeFavorite(id)),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(App);
