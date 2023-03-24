@@ -1,6 +1,6 @@
 import logo from "../../assets/rick-and-morty.png";
 // Components
-import Cards from "../Cards/Cards";
+import CardsContainer from "../Cards/CardsContainer";
 // React router dom
 import { Link } from "react-router-dom";
 // Redux react
@@ -16,7 +16,7 @@ function Favorites(props) {
     return (
         <>
             {favoritesCards.length ? (
-                <Cards characters={favoritesCards} onClose={onClose} />
+                <CardsContainer characters={favoritesCards} onClose={onClose} />
             ) : (
                 <div>
                     <h2>Sorry, you dont have any favorite card yet.</h2>
