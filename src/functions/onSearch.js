@@ -1,5 +1,5 @@
 // ENV
-const API_URL = "http://localhost:3001";
+const BACKEND_URL = "http://localhost:3001";
 const MIN_ID = 1;
 const MAX_ID = 826;
 
@@ -23,7 +23,7 @@ const onSearchExt = async (id, characters) => {
         do {
             randomId = Math.floor(Math.random() * MAX_ID) + 1;
         } while (characters.some((char) => char.id === randomId));
-        const response = await fetch(`${API_URL}/search/${randomId}`);
+        const response = await fetch(`${BACKEND_URL}/search/${randomId}`);
         const data = await response.json();
 
         if (data.name) {
@@ -41,7 +41,7 @@ const onSearchExt = async (id, characters) => {
         return obj;
     }
 
-    const response = await fetch(`${API_URL}/search/${id}`);
+    const response = await fetch(`${BACKEND_URL}/search/${id}`);
     const data = await response.json();
 
     if (data.name) {

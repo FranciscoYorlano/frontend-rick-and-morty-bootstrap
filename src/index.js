@@ -14,7 +14,7 @@ import App from "./App";
 // React Router Dom
 import { BrowserRouter } from "react-router-dom";
 
-// React Redux
+// Redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
 

@@ -7,7 +7,7 @@ import axios from "axios";
 /* =================================================*/
 
 // ENV
-const API_URL = "http://localhost:3001";
+const BACKEND_URL = "http://localhost:3001";
 
 /* =================================================*/
 
@@ -16,7 +16,7 @@ function Detail() {
     const [character, setCharacter] = useState({});
 
     useEffect(() => {
-        axios(`${API_URL}/detail/${detailId}`).then((response) =>
+        axios(`${BACKEND_URL}/detail/${detailId}`).then((response) =>
             setCharacter(response.data)
         );
     }, []);
