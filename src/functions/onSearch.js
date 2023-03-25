@@ -7,17 +7,16 @@ const onSearchExt = async (id, characters) => {
     let error = "";
 
     if (characters.some((char) => char.id === Number(id))) {
-        error = "ID ya esta en characters";
-        console.log(error);
-        return false;
+        error = "The character you are trying to add is already in your cards";
+        return error;
     }
 
     if (characters.length >= MAX_ID) {
-        error = "No existen más personajes";
-        console.log(error);
-        return false;
+        error = "There are no more characters to add";
+        return error;
     }
 
+    // Random ID function
     if (!id) {
         let randomId;
         do {
@@ -29,14 +28,15 @@ const onSearchExt = async (id, characters) => {
         if (data.name) {
             return data;
         } else {
-            window.alert("API ERROR");
-            return false;
+            error =
+                "The character cannot be loaded at this time. Try again in a few minutes";
+            return error;
         }
     }
 
     if (id < MIN_ID || id > MAX_ID) {
-        console.log("Out");
-        return false;
+        error = " Please enter a valid ID";
+        return error;
     }
 
     const response = await fetch(`${API_URL}/search/${id}`);
@@ -46,8 +46,9 @@ const onSearchExt = async (id, characters) => {
         console.log(data);
         return data;
     } else {
-        window.alert("API ERROR");
-        return false;
+        error =
+            "The character cannot be loaded at this time. Try again in a few minutes";
+        return error;
     }
 };
 

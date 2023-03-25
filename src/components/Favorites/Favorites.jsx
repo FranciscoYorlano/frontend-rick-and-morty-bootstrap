@@ -1,6 +1,6 @@
 import logo from "../../assets/rick-and-morty.png";
 // Components
-import CardsContainer from "../Cards/CardsContainer";
+import CardsContainer from "../CardsContainer/CardsContainer";
 // React router dom
 import { Link } from "react-router-dom";
 // Redux react

@@ -6,9 +6,6 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Badge from "react-bootstrap/Badge";
 
-// Actions to dispatch
-import { addFavorite, removeFavorite } from "../../redux/actions";
-
 // Hooks
 import { useEffect, useState } from "react";
 
@@ -17,6 +14,7 @@ import { Link } from "react-router-dom";
 
 // Redux
 import { connect } from "react-redux";
+import { addFavorite, removeFavorite } from "../../redux/actions";
 /* =================================================*/
 
 /* =================================================*/
@@ -49,7 +47,7 @@ function CardComp(props) {
 
     // Render
     return (
-        <Card style={{ width: "14rem" }} className="m-3">
+        <Card style={{ width: "100px" }}>
             <Link to={`/detail/${char.id}`}>
                 <Card.Img variant="top" src={char.image} alt={char.name} />
             </Link>

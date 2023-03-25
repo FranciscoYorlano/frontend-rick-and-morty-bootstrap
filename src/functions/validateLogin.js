@@ -26,6 +26,14 @@ const validateLogin = (userData) => {
             "Password must be between 6 and 10 characters in length and contain at least one number";
     }
 
+    // Empty
+    if (!email) {
+        errors.emailError = "";
+    }
+    if (!password) {
+        errors.passwordError = "";
+    }
+
     return errors;
 };
 

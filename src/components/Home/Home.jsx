@@ -1,5 +1,6 @@
 // Components
-import CardsContainer from "../Cards/CardsContainer";
+import CardsContainer from "../CardsContainer/CardsContainer";
+import CardComp from "../CardComp/CardComp";
 
 /* =================================================*/
 
@@ -8,11 +9,7 @@ import CardsContainer from "../Cards/CardsContainer";
 function Home(props) {
     const { characters, onClose } = props;
 
-    return (
-        <>
-            <CardsContainer characters={characters} onClose={onClose} />
-        </>
-    );
+    return <CardsContainer characters={characters} onClose={onClose} />;
 }
 
 export default Home;

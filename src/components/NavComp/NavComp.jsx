@@ -1,5 +1,7 @@
+// Assets
 import logo from "../../assets/rick-and-morty.png";
 import { VscGithub } from "react-icons/vsc";
+import { BsLinkedin } from "react-icons/bs";
 
 // Bootstrap
 import Button from "react-bootstrap/Button";
@@ -46,16 +48,27 @@ function NavComp(props) {
                         navbarScroll
                     >
                         <Nav.Link>
-                            <Link to="/home">Home</Link>
+                            <Link
+                                to="/home"
+                                className="text-reset text-decoration-none"
+                            >
+                                Home
+                            </Link>
                         </Nav.Link>
 
-                        <Nav.Link href="#action2">
-                            <Link to="/About">About</Link>
+                        <Nav.Link>
+                            <Link
+                                to="/About"
+                                className="text-reset text-decoration-none"
+                            >
+                                About
+                            </Link>
                         </Nav.Link>
 
                         <NavDropdown
                             title="UserName"
                             id="navbarScrollingDropdown"
+                            className=""
                         >
                             <NavDropdown.Item>{count} Cards</NavDropdown.Item>
 
@@ -63,16 +76,28 @@ function NavComp(props) {
 
                             <NavDropdown.Item>
                                 <Nav.Link>
-                                    <Link to="/Home">My Cards</Link>
+                                    <Link
+                                        to="/Home"
+                                        className="text-secondary text-decoration-none "
+                                    >
+                                        My Cards
+                                    </Link>
                                 </Nav.Link>
                             </NavDropdown.Item>
                             <NavDropdown.Item>
                                 <Nav.Link>
-                                    <Link to="/favorites">Favorites</Link>
+                                    <Link
+                                        to="/favorites"
+                                        className="text-secondary text-decoration-none"
+                                    >
+                                        Favorites
+                                    </Link>
                                 </Nav.Link>
                             </NavDropdown.Item>
                             <NavDropdown.Item>
-                                <Nav.Link disabled>Create Card</Nav.Link>
+                                <Nav.Link disabled className="text-secondary">
+                                    Create Card
+                                </Nav.Link>
                             </NavDropdown.Item>
 
                             <NavDropdown.Divider />
@@ -81,6 +106,7 @@ function NavComp(props) {
                                 <Button
                                     variant="danger"
                                     type="submit"
+                                    size="sm"
                                     onClick={handleSubmit}
                                 >
                                     Logout
@@ -92,6 +118,12 @@ function NavComp(props) {
                             target="_blank"
                         >
                             <VscGithub />
+                        </Nav.Link>
+                        <Nav.Link
+                            href="https://www.linkedin.com/in/francisco-yorlano/"
+                            target="_blank"
+                        >
+                            <BsLinkedin />
                         </Nav.Link>
                     </Nav>
                     <SearchBar onSearch={onSearch} />

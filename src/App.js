@@ -3,11 +3,13 @@ import "./App.css";
 
 // Bootstrap
 import Container from "react-bootstrap/Container";
+import Alert from "react-bootstrap/Alert";
 
 // Component imports
 import About from "./components/About/About";
 import Detail from "./components/Detail/Detail";
 import Favorites from "./components/Favorites/Favorites";
+import Footer from "./components/Footer/Footer";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import NavComp from "./components/NavComp/NavComp";
@@ -38,6 +40,7 @@ function App(props) {
     // States
     const [characters, setCharacters] = useState([]);
     const [access, setAccess] = useState(false);
+    const [error, setError] = useState("");
 
     // Var
     const navigate = useNavigate();
@@ -65,11 +68,11 @@ function App(props) {
     };
 
     const onSearch = (id) => {
-        onSearchExt(id, characters).then((characterNew) => {
-            if (characterNew) {
-                setCharacters([...characters, characterNew]);
+        onSearchExt(id, characters).then((data) => {
+            if (data.name) {
+                setCharacters([...characters, data]);
             } else {
-                console.log("error app");
+                setError(data);
             }
         });
     };
@@ -86,7 +89,11 @@ function App(props) {
                 <NavComp onSearch={onSearch} logout={logout} count={counter} />
             )}
 
-            <Container fluid className="justify-content-md-center text-center">
+            <Container
+                fluid
+                className="justify-content-md-center text-center w-100"
+                style={{ minHeight: "100vh" }}
+            >
                 <Routes>
                     <Route
                         path="/home"
@@ -117,3 +124,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(null, mapDispatchToProps)(App);
+
+// <div>{error && <Alert variant="danger">{error}</Alert>}</div>

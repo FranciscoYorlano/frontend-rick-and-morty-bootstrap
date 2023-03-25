@@ -41,7 +41,6 @@ function SearchBar(props) {
             >
                 Add
             </Button>
-            <span class="visually-hidden">Github</span>
         </Form>
     );
 }
