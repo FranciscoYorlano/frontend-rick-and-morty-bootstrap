@@ -1,15 +1,17 @@
-// Components
-import CardsContainer from "../CardsContainer/CardsContainer";
-import CardComp from "../CardComp/CardComp";
+/* =================================================
 
-/* =================================================*/
+Home component - Home page for Rick and Morty App
 
-/* =================================================*/
+====================================================*/
 
 function Home(props) {
     const { characters, onClose } = props;
 
-    return <CardsContainer characters={characters} onClose={onClose} />;
+    return (
+        <>
+            <h1>Home</h1>
+        </>
+    );
 }
 
 export default Home;

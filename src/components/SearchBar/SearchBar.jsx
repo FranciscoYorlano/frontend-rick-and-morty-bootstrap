@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 
 // Hooks
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 /* =================================================*/
 
@@ -11,7 +12,10 @@ import { useState } from "react";
 
 function SearchBar(props) {
     // Props
-    const { onSearch } = props;
+    const { onSearch, user } = props;
+
+    // VARs
+    const navigate = useNavigate();
 
     // State
     const [characterId, setCharacterId] = useState("");
@@ -37,6 +41,7 @@ function SearchBar(props) {
                 onClick={() => {
                     onSearch(characterId);
                     setCharacterId("");
+                    navigate("/" + user.userName + "/cards");
                 }}
             >
                 Add

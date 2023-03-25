@@ -2,6 +2,7 @@
 import logo from "../../assets/rick-and-morty.png";
 import { VscGithub } from "react-icons/vsc";
 import { BsLinkedin } from "react-icons/bs";
+import { AiOutlineUser } from "react-icons/ai";
 
 // Bootstrap
 import Button from "react-bootstrap/Button";
@@ -21,7 +22,7 @@ import { Link } from "react-router-dom";
 /* =================================================*/
 
 function NavComp(props) {
-    const { onSearch, count, logout } = props;
+    const { onSearch, count, logout, user } = props;
 
     const handleSubmit = (event) => {
         logout();
@@ -66,18 +67,26 @@ function NavComp(props) {
                         </Nav.Link>
 
                         <NavDropdown
-                            title="UserName"
+                            title={<AiOutlineUser />}
                             id="navbarScrollingDropdown"
                             className=""
                         >
-                            <NavDropdown.Item>{count} Cards</NavDropdown.Item>
+                            <NavDropdown.Item disabled>
+                                {user.userName}
+                            </NavDropdown.Item>
+
+                            <NavDropdown.Divider />
+
+                            <NavDropdown.Item disabled>
+                                Cards: {count}
+                            </NavDropdown.Item>
 
                             <NavDropdown.Divider />
 
                             <NavDropdown.Item>
                                 <Nav.Link>
                                     <Link
-                                        to="/Home"
+                                        to={`${user.userName}/cards`}
                                         className="text-secondary text-decoration-none "
                                     >
                                         My Cards
@@ -87,7 +96,7 @@ function NavComp(props) {
                             <NavDropdown.Item>
                                 <Nav.Link>
                                     <Link
-                                        to="/favorites"
+                                        to={`${user.userName}/favorites`}
                                         className="text-secondary text-decoration-none"
                                     >
                                         Favorites
@@ -126,7 +135,7 @@ function NavComp(props) {
                             <BsLinkedin />
                         </Nav.Link>
                     </Nav>
-                    <SearchBar onSearch={onSearch} />
+                    <SearchBar onSearch={onSearch} user={user} />
                 </Navbar.Collapse>
             </Container>
         </Navbar>

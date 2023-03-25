@@ -3,11 +3,12 @@ import "./App.css";
 
 // Bootstrap
 import Container from "react-bootstrap/Container";
-import Alert from "react-bootstrap/Alert";
 
 // Component imports
 import About from "./components/About/About";
+import AlertBar from "./components/AlertBar/AlertBar";
 import Detail from "./components/Detail/Detail";
+import Cards from "./components/Cards/Cards";
 import Favorites from "./components/Favorites/Favorites";
 import Footer from "./components/Footer/Footer";
 import Home from "./components/Home/Home";
@@ -31,8 +32,11 @@ import { addFavorite, removeFavorite } from "./redux/actions";
 
 /* =================================================*/
 // Fake credencials
-const adminEmail = "admin@gmail.com";
-const adminPassword = "admin123";
+const user = {
+    userName: "franyorlano",
+    email: "admin@gmail.com",
+    password: "admin123",
+};
 
 /* =================================================*/
 
@@ -54,7 +58,7 @@ function App(props) {
     const login = (userCredentials) => {
         const { email, password } = userCredentials;
 
-        if (email === adminEmail && password === adminPassword) {
+        if (email === user.email && password === user.password) {
             setAccess(true);
             return true;
         } else {
@@ -68,11 +72,12 @@ function App(props) {
     };
 
     const onSearch = (id) => {
-        onSearchExt(id, characters).then((data) => {
-            if (data.name) {
-                setCharacters([...characters, data]);
+        onSearchExt(id, characters).then((obj) => {
+            if (obj.error) {
+                setError(obj.error);
             } else {
-                setError(data);
+                setCharacters([...characters, obj.data]);
+                setError(obj.error);
             }
         });
     };
@@ -86,7 +91,12 @@ function App(props) {
     return (
         <>
             {useLocation().pathname !== "/login" && (
-                <NavComp onSearch={onSearch} logout={logout} count={counter} />
+                <NavComp
+                    onSearch={onSearch}
+                    logout={logout}
+                    count={counter}
+                    user={user}
+                />
             )}
 
             <Container
@@ -94,15 +104,17 @@ function App(props) {
                 className="justify-content-md-center text-center w-100"
                 style={{ minHeight: "100vh" }}
             >
+                {error && <AlertBar error={error} />}
                 <Routes>
+                    <Route path="/home" element={<Home />} />
                     <Route
-                        path="/home"
+                        path={`${user.userName}/cards`}
                         element={
-                            <Home characters={characters} onClose={onClose} />
+                            <Cards characters={characters} onClose={onClose} />
                         }
                     />
                     <Route
-                        path="/favorites"
+                        path={`${user.userName}/favorites`}
                         element={<Favorites onClose={onClose} />}
                     />
                     <Route exact path="/" element={<Navigate to="/home" />} />
