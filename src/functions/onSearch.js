@@ -43,7 +43,6 @@ const onSearchExt = async (id, characters) => {
     const data = await response.json();
 
     if (data.name) {
-        console.log(data);
         return data;
     } else {
         error =
