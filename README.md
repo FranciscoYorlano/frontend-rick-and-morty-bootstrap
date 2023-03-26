@@ -1,6 +1,6 @@
 # Rick and Morty App
 
-## Frontend Tailwind version
+## Frontend Bootstrap version
 
 ### By Francisco Yorlano
 
