@@ -1,9 +1,10 @@
-import { ADD_FAVORITE, REMOVE_FAVORITE } from "./actions";
+import { ADD_FAVORITE, REMOVE_FAVORITE, SET_GLOBAL_ERROR } from "./actions";
 
 // Inicial State
 const inicialState = {
     allCharacters: [],
     favoritesCards: [],
+    globalError: "",
 };
 
 // Redux reducer
@@ -20,6 +21,11 @@ const rootReducer = (state = inicialState, action) => {
                 favoritesCards: state.favoritesCards.filter(
                     (favCard) => favCard.id !== action.payload
                 ),
+            };
+        case SET_GLOBAL_ERROR:
+            return {
+                ...state,
+                globalError: action.payload,
             };
         default:
             return { ...state };

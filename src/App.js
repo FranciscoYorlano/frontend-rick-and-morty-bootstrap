@@ -28,7 +28,7 @@ import onSearchExt from "./functions/onSearch";
 
 // React redux
 import { connect } from "react-redux";
-import { addFavorite, removeFavorite } from "./redux/actions";
+import { addFavorite, removeFavorite, setGlobalError } from "./redux/actions";
 
 /* =================================================*/
 // Fake credencials
@@ -44,12 +44,12 @@ function App(props) {
     // States
     const [characters, setCharacters] = useState([]);
     const [access, setAccess] = useState(false);
-    const [error, setError] = useState("");
 
     // Var
     const navigate = useNavigate();
     let counter = characters.length;
 
+    // UseEffect
     useEffect(() => {
         !access && navigate("/login");
     }, []);
@@ -72,12 +72,13 @@ function App(props) {
     };
 
     const onSearch = (id) => {
+        props.setGlobalError("");
         onSearchExt(id, characters).then((obj) => {
             if (obj.error) {
-                setError(obj.error);
+                props.setGlobalError(obj.error);
             } else {
                 setCharacters([...characters, obj.data]);
-                setError(obj.error);
+                props.setGlobalError(obj.error);
             }
         });
     };
@@ -101,10 +102,9 @@ function App(props) {
 
             <Container
                 fluid
-                className="justify-content-md-center text-center w-100"
-                style={{ minHeight: "100vh" }}
+                className="justify-content-md-center text-center w-100 mt-3 mb-3"
             >
-                {error && <AlertBar error={error} />}
+                {props.globalError && <AlertBar error={props.globalError} />}
                 <Routes>
                     <Route path="/home" element={<Home />} />
                     <Route
@@ -128,13 +128,19 @@ function App(props) {
         </>
     );
 }
+
+const mapStateToProps = (state) => {
+    return {
+        globalError: state.globalError,
+    };
+};
+
 const mapDispatchToProps = (dispatch) => {
     return {
         addFavorite: (char) => dispatch(addFavorite(char)),
         removeFavorite: (id) => dispatch(removeFavorite(id)),
+        setGlobalError: (error) => dispatch(setGlobalError(error)),
     };
 };
 
-export default connect(null, mapDispatchToProps)(App);
-
-// <div>{error && <Alert variant="danger">{error}</Alert>}</div>
+export default connect(mapStateToProps, mapDispatchToProps)(App);

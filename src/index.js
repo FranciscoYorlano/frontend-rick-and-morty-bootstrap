@@ -1,8 +1,8 @@
-// CSS
-import "./index.css";
-
 // Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
+
+// CSS
+import "./index.css";
 
 // React
 import React from "react";

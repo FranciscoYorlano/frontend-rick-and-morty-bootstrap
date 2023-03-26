@@ -1,5 +1,7 @@
 // Bootstrap
 import CardGroup from "react-bootstrap/CardGroup";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 // Styles
 import styles from "./CardsContainer.module.css";
@@ -14,17 +16,14 @@ import CardComp from "../CardComp/CardComp";
 function CardsContainer(props) {
     const { characters, onClose } = props;
     return (
-        <CardGroup>
+        <Row className="justify-content-center">
             {characters.length > 0 &&
                 characters.map((char) => (
-                    <CardComp
-                        key={char.id}
-                        char={char}
-                        onClose={onClose}
-                        className={styles.card}
-                    />
+                    <Col key={char.id} className="mb-3">
+                        <CardComp char={char} onClose={onClose} />
+                    </Col>
                 ))}
-        </CardGroup>
+        </Row>
     );
 }
 
