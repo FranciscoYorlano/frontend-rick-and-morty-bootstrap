@@ -15,6 +15,7 @@ const rootReducer = (state = inicialState, action) => {
                 ...state,
                 favoritesCards: [...state.favoritesCards, action.payload],
             };
+
         case REMOVE_FAVORITE:
             return {
                 ...state,
