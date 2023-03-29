@@ -11,12 +11,17 @@ import { connect } from "react-redux";
 /* =================================================*/
 
 function Favorites(props) {
-    const { favoritesCards, onClose } = props;
+    const { favoritesCards, onClose, addFavorite, removeFavorite } = props;
 
     return (
         <>
             {favoritesCards.length ? (
-                <CardsContainer characters={favoritesCards} onClose={onClose} />
+                <CardsContainer
+                    characters={favoritesCards}
+                    onClose={onClose}
+                    addFavorite={addFavorite}
+                    removeFavorite={removeFavorite}
+                />
             ) : (
                 <div>
                     <h2>Sorry, you dont have any favorite card yet.</h2>

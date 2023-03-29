@@ -14,8 +14,12 @@ import { Link } from "react-router-dom";
 
 // Redux
 import { connect } from "react-redux";
-import { addFavorite, removeFavorite } from "../../redux/actions";
+
+// Axios
+import axios from "axios";
 /* =================================================*/
+
+const BACKEND_URL = "http://localhost:3001";
 
 /* =================================================*/
 
@@ -27,14 +31,18 @@ function CardComp(props) {
     const [isFav, setIsFav] = useState(false);
 
     useEffect(() => {
-        favoritesCards.forEach((favCard) => {
-            if (favCard.id === char.id) {
-                setIsFav(true);
-            }
-        });
+        axios
+            .get(`${BACKEND_URL}/rickandmorty/fav`)
+            .then((response) => response.data)
+            .then((response) => {
+                response.forEach((favCard) => {
+                    if (favCard.id === char.id) {
+                        setIsFav(true);
+                    }
+                });
+            });
     }, []);
 
-    // Functions
     const handleFavorite = () => {
         if (isFav) {
             setIsFav(false);
@@ -102,11 +110,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addFavorite: (char) => dispatch(addFavorite(char)),
-        removeFavorite: (id) => dispatch(removeFavorite(id)),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardComp);
+export default connect(mapStateToProps, null)(CardComp);

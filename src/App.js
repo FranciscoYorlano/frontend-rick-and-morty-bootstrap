@@ -28,7 +28,10 @@ import onSearchExt from "./functions/onSearch";
 
 // React redux
 import { connect } from "react-redux";
-import { addFavorite, removeFavorite, setGlobalError } from "./redux/actions";
+import { setGlobalError } from "./redux/actions";
+
+// Axios
+import axios from "axios";
 
 /* =================================================*/
 // Fake credencials
@@ -37,6 +40,8 @@ const user = {
     email: "admin@gmail.com",
     password: "admin123",
 };
+
+const BACKEND_URL = "http://localhost:3001";
 
 /* =================================================*/
 
@@ -55,6 +60,18 @@ function App(props) {
     }, []);
 
     // Functions
+    const addFavorite = (char) => {
+        axios
+            .post(`${BACKEND_URL}/rickandmorty/fav`)
+            .then((res) => console.log(res.data.status));
+    };
+
+    const removeFavorite = (id) => {
+        axios
+            .delete(`${BACKEND_URL}/rickandmorty/fav/${id}`)
+            .then((res) => console.log(res.data.status));
+    };
+
     const login = (userCredentials) => {
         const { email, password } = userCredentials;
 
@@ -84,7 +101,7 @@ function App(props) {
     };
 
     const onClose = (id) => {
-        props.removeFavorite(id);
+        removeFavorite(id);
         setCharacters(characters.filter((char) => char.id !== id));
     };
 
@@ -110,12 +127,23 @@ function App(props) {
                     <Route
                         path={`${user.userName}/cards`}
                         element={
-                            <Cards characters={characters} onClose={onClose} />
+                            <Cards
+                                characters={characters}
+                                onClose={onClose}
+                                addFavorite={addFavorite}
+                                removeFavorite={removeFavorite}
+                            />
                         }
                     />
                     <Route
                         path={`${user.userName}/favorites`}
-                        element={<Favorites onClose={onClose} />}
+                        element={
+                            <Favorites
+                                onClose={onClose}
+                                addFavorite={addFavorite}
+                                removeFavorite={removeFavorite}
+                            />
+                        }
                     />
                     <Route exact path="/" element={<Navigate to="/home" />} />
                     <Route path="/login" element={<Login login={login} />} />
@@ -137,8 +165,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addFavorite: (char) => dispatch(addFavorite(char)),
-        removeFavorite: (id) => dispatch(removeFavorite(id)),
         setGlobalError: (error) => dispatch(setGlobalError(error)),
     };
 };
